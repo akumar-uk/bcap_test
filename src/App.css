@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	border: 2px solid rgb(93, 93, 186);
+	background-color: white;
+	border-radius: 10px;
+	margin: 20px;
+	overflow: hidden;
+}
+
+.nav {
+	/* width: min-content; */
+	border-right: 2px solid rgb(93, 93, 186);
+	background-color: rgb(207, 217, 240);
+	padding: 20px;
+
+	.menu {
+	}
+}
+
+.dashboard {
+	display: flex;
+	flex: 1;
+	padding: 20px;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.filter {
+	margin-top: 20px;
+	border-top: 2px solid rgb(93, 93, 186);
+}
