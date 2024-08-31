@@ -1,12 +1,15 @@
 import './App.css';
 import ApplicationCard from './components/ApplicationCard';
+import NavigationTree from './components/NavigationTree';
 function App() {
 	return (
 		<>
 			<div className="container">
 				<div className="nav">
 					<h3>Navigation</h3>
-					<div className="menu">Application Capability 1</div>
+					<div className="menu">
+						<NavigationTree />
+					</div>
 					<div className="filter">
 						<h3>Filter</h3>
 						Filter
