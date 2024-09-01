@@ -1,0 +1,14 @@
+.rangeTitle {
+	color: gray;
+	display: block;
+	margin-bottom: 10px;
+}
+
+.rangeLabel {
+	display: flex;
+	justify-content: space-between;
+}
+
+.slider {
+	width: 100%;
+}

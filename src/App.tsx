@@ -2,25 +2,34 @@ import { useState } from 'react';
 import './App.css';
 import ApplicationCard from './components/ApplicationCard';
 import NavigationTree from './components/NavigationTree';
-import useFetchData, { dataProps } from './hooks/useFetchData';
+import useFetchData from './hooks/useFetchData';
+import RangeSlider from './components/RangeSlider';
 
 function App() {
 	const [selectedLevel, setSelectedLevel] = useState<null | string>(null);
 	const { data, error } = useFetchData();
+	const [maxSpending, setMaxSpending] = useState<number>(100000);
 
 	const handleSelect = (level: string) => {
 		setSelectedLevel(level);
 	};
 
 	const filteredData = data.filter((apps) => {
-		return (
+		const withInRange = apps.spend <= maxSpending;
+
+		const levelsData =
 			apps.BCAP1 === selectedLevel ||
 			apps.BCAP2 === selectedLevel ||
-			apps.BCAP3 === selectedLevel
-		);
+			apps.BCAP3 === selectedLevel;
+
+		return withInRange && levelsData;
 	});
 
-	console.log(filteredData);
+	if (error) {
+		return <p>Error: {error.message}</p>;
+	}
+
+	console.log('maxSpending ->', maxSpending);
 
 	return (
 		<>
@@ -32,7 +41,7 @@ function App() {
 					</div>
 					<div className="filter">
 						<h3>Filter</h3>
-						Filter
+						<RangeSlider value={maxSpending} onChange={setMaxSpending} />
 					</div>
 				</div>
 				<div className="dashboard">
