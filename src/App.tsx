@@ -2,15 +2,25 @@ import { useState } from 'react';
 import './App.css';
 import ApplicationCard from './components/ApplicationCard';
 import NavigationTree from './components/NavigationTree';
+import useFetchData, { dataProps } from './hooks/useFetchData';
 
 function App() {
 	const [selectedLevel, setSelectedLevel] = useState<null | string>(null);
+	const { data, error } = useFetchData();
 
 	const handleSelect = (level: string) => {
 		setSelectedLevel(level);
 	};
 
-	console.log(selectedLevel);
+	const filteredData = data.filter((apps) => {
+		return (
+			apps.BCAP1 === selectedLevel ||
+			apps.BCAP2 === selectedLevel ||
+			apps.BCAP3 === selectedLevel
+		);
+	});
+
+	console.log(filteredData);
 
 	return (
 		<>
@@ -26,11 +36,9 @@ function App() {
 					</div>
 				</div>
 				<div className="dashboard">
-					<ApplicationCard name="Application 2" spend={2002} />
-					<ApplicationCard name="Application 2" spend={2002} />
-					<ApplicationCard name="Application 2" spend={2002} />
-					<ApplicationCard name="Application 2" spend={2002} />
-					<ApplicationCard name="Application 2" spend={2002} />
+					{filteredData.map((app) => (
+						<ApplicationCard name={app.name} spend={app.spend} />
+					))}
 				</div>
 			</div>
 		</>
