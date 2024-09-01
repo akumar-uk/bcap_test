@@ -12,9 +12,6 @@
 	border-right: 2px solid rgb(93, 93, 186);
 	background-color: rgb(207, 217, 240);
 	padding: 20px;
-
-	.menu {
-	}
 }
 
 .dashboard {
@@ -23,6 +20,7 @@
 	padding: 20px;
 	flex-wrap: wrap;
 	gap: 10px;
+	height: min-content;
 }
 
 .filter {

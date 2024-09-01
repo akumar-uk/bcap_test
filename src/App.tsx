@@ -1,14 +1,24 @@
+import { useState } from 'react';
 import './App.css';
 import ApplicationCard from './components/ApplicationCard';
 import NavigationTree from './components/NavigationTree';
+
 function App() {
+	const [selectedLevel, setSelectedLevel] = useState<null | string>(null);
+
+	const handleSelect = (level: string) => {
+		setSelectedLevel(level);
+	};
+
+	console.log(selectedLevel);
+
 	return (
 		<>
 			<div className="container">
 				<div className="nav">
 					<h3>Navigation</h3>
 					<div className="menu">
-						<NavigationTree />
+						<NavigationTree handleSelect={handleSelect} />
 					</div>
 					<div className="filter">
 						<h3>Filter</h3>

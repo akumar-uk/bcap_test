@@ -1,13 +1,15 @@
+import { handleSelectProps } from '../utils/commonTypes';
 import { dataNestedTree } from '../utils/dataNestedTree';
 import NavItem from './NavItem';
 
-const NavigationTree = () => {
+const NavigationTree = ({ handleSelect }: handleSelectProps) => {
 	const navtree = dataNestedTree();
+	console.log(navtree);
 
 	return (
 		<div>
 			{navtree.map((item) => (
-				<NavItem {...item} />
+				<NavItem {...item} handleSelect={handleSelect} />
 			))}
 		</div>
 	);
