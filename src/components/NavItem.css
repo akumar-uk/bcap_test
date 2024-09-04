@@ -1,10 +1,11 @@
 .navTitle {
 	cursor: pointer;
+	color: rgb(42, 70, 132);
 }
 
 .navButton {
 	display: flex;
-	background-color: rgb(130, 165, 231);
+	background-color: white;
 	margin: 10px;
 	align-items: center;
 	gap: 10px;

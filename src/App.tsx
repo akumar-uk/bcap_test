@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import './App.css';
 import ApplicationCard from './components/ApplicationCard';
 import NavigationTree from './components/NavigationTree';
@@ -10,20 +10,20 @@ function App() {
 	const { data, error } = useFetchData();
 	const [maxSpending, setMaxSpending] = useState<number>(100000);
 
-	const handleSelect = (level: string) => {
+	const handleSelect = useCallback((level: string) => {
 		setSelectedLevel(level);
-	};
+	}, []);
 
-	const filteredData = data.filter((apps) => {
-		const withInRange = apps.spend <= maxSpending;
-
-		const levelsData =
-			apps.BCAP1 === selectedLevel ||
-			apps.BCAP2 === selectedLevel ||
-			apps.BCAP3 === selectedLevel;
-
-		return withInRange && levelsData;
-	});
+	const filteredData = useMemo(() => {
+		return data.filter((apps) => {
+			const withInRange = apps.spend <= maxSpending;
+			const levelsData =
+				apps.BCAP1 === selectedLevel ||
+				apps.BCAP2 === selectedLevel ||
+				apps.BCAP3 === selectedLevel;
+			return withInRange && levelsData;
+		});
+	}, [data, maxSpending, selectedLevel]);
 
 	if (error) {
 		return <p>Error: {error.message}</p>;
@@ -46,7 +46,7 @@ function App() {
 				</div>
 				<div className="dashboard">
 					{filteredData.map((app) => (
-						<ApplicationCard name={app.name} spend={app.spend} />
+						<ApplicationCard key={app.id} name={app.name} spend={app.spend} />
 					))}
 				</div>
 			</div>
